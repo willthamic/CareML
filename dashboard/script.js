@@ -10,18 +10,49 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+openGraph("remittens");
+
 function writeData(reference, data) {
     firebase.database().ref(reference).set(data);
 }
 
 function readData(reference) {
-    return firebase.database().ref(reference).once();
+    var ref = firebase.database().ref(reference);
+    ref.once('value', function(data) {
+        if (reference == "remittens")
+            drawRemittens(data.val());
+        if (reference == "patient")
+            updatePatient(data.val());
+        else
+            drawGeneral(data.val());
+    });
 }
 
-console.log(firebase.database().ref("patient").once('value'));
+function drawRemittens(temp) {
+    var input = {
+        independent: temp.x,
+        dependent: temp.y,
+        scale: true,
+        min: 0,
+        max: 100
+    }
+    drawGraph(input);
+}
 
+function drawGeneral(temp) {
+    var input = {
+        independent: temp.x,
+        dependent: temp.y,
+        scale: false
+    }
+    drawGraph(input);
+}
 
-//drawGraph(input);
+function openGraph(name) {
+    readData(name);
+    $(".nav-link").removeClass("active");
+    $(".nav-link." + name).addClass("active");
+}
 
 function drawGraph(input) {
     var independent = input.independent;
