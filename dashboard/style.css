@@ -34,6 +34,14 @@
     display:flex;
     align-items:center;
     font-size:20px;
+    color:#000;
+    text-decoration: none;
+    margin-bottom:5px;
+    margin-left:5px;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 .nav-item i {

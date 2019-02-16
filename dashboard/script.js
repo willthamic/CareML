@@ -10,7 +10,17 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+updatePatient();
 openGraph("remittens");
+
+$("#messageInput").on('keypress',function(e) {
+    if(e.which == 13) {
+        var val = $("#messageInput").val();
+        var date = Math.floor(Date.now()/1000);
+        writeData("messages/0", {message: val, date: date});
+        $("#messageInput").val("");
+    }
+});
 
 function writeData(reference, data) {
     firebase.database().ref(reference).set(data);
@@ -22,10 +32,42 @@ function readData(reference) {
         if (reference == "remittens")
             drawRemittens(data.val());
         if (reference == "patient")
-            updatePatient(data.val());
+            updatePatientVals(data.val());
         else
             drawGeneral(data.val());
     });
+}
+
+function openGraph(name) {
+    readData(name);
+    $(".nav-link").removeClass("active");
+    $(".nav-link." + name).addClass("active");
+}
+
+function updatePatient() {
+    readData("patient");
+}
+
+function updatePatientVals(patient) {
+    $('#sex').text(patient.sex);
+    $('#age').text(patient.age);
+    $('#blood').text(patient.blood);
+    $('#weight').text(patient.weight + " LBS");
+    $('#name').text(patient.name);
+
+    var historyTable = $("#historyTable");
+    historyTable.html("<thead><tr><th>Visit</th><th>Date</th></tr></thead>");
+    for (var i = 0; i < patient.visits.length; i++) {
+        var visit = patient.visits[i];
+        historyTable.html(historyTable.html() + "<tr><td>" + visit.issue + "</td><td>" + visit.date + "</td></tr>");
+    }
+
+    var medTable = $("#medTable");
+    medTable.html("<thead><tr><th>Medication</th><th>Dosage</th></tr></thead>");
+    for (var i = 0; i < patient.medications.length; i++) {
+        var med = patient.medications[i];
+        medTable.html(medTable.html() + "<tr><td>" + med.medicine + "</td><td>" + med.dosage + "</td></tr>");
+    }
 }
 
 function drawRemittens(temp) {
@@ -48,11 +90,6 @@ function drawGeneral(temp) {
     drawGraph(input);
 }
 
-function openGraph(name) {
-    readData(name);
-    $(".nav-link").removeClass("active");
-    $(".nav-link." + name).addClass("active");
-}
 
 function drawGraph(input) {
     var independent = input.independent;
@@ -122,21 +159,27 @@ function drawGraph(input) {
 
 }
 
-// for (var i = 0; i < 30; i++) {
-//     var today = Date.now();
+var input = {
+    x: [],
+    y: [],
+}
 
-//     var dateString = "02/16/2019";
-//     var day = new Date(dateString);
-//     day.setDate(day.getDate() - 30 + i);
+for (var i = 0; i < 30; i++) {
+    var today = Date.now();
 
-//     var dd = day.getDate();
-//     var mm = day.getMonth() + 1;
-//     var yyyy = day.getFullYear();
+    var dateString = "02/16/2019";
+    var day = new Date(dateString);
+    day.setDate(day.getDate() - 30 + i);
 
-//     if (dd < 10) dd = '0' + dd;
-//     if (mm < 10) mm = '0' + mm;
-//     day = yyyy + '-' + mm + '-' + dd;
+    var dd = day.getDate();
+    var mm = day.getMonth() + 1;
+    var yyyy = day.getFullYear();
 
-//     input.independent.push(day.toString());
-//     input.dependent.push(Math.random() * 20 + 20 + 0.05 * i * i);
-// }
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+    day = yyyy + '-' + mm + '-' + dd;
+
+    input.x.push(day.toString());
+    input.y.push(Math.random() * 20 + 50);
+}
+//writeData("sleep", input);
