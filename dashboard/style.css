@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 :root {
-    --active-color: #007bff;
+    --primary-color: #F44336;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
 }
 
 .sidebar {
@@ -20,7 +26,8 @@
 }
 
 .nav-item.active {
-    color:var(--active-color);
+    color:var(--primary-color);
+    font-weight: bold;
 }
 
 .nav-item {
@@ -31,4 +38,38 @@
 
 .nav-item i {
     margin-right:5px;
+}
+
+
+.card-profile table.table tr td {
+    border-top:none;
+}
+
+table.table tr td, table.table tr th {
+    padding:2px;
+}
+
+table.table:last-child{
+    margin:0;
+}
+
+.card {
+    margin-bottom:20px;
+}
+
+.table td:last-child, .table th:last-child {
+    text-align:right;
+}
+
+.progress-bar {
+    background-color:var(--primary-color);
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+.nav-link {
+    color: var(--primary-color);
 }
