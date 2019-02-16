@@ -81,3 +81,8 @@ table.table:last-child{
 .nav-link {
     color: var(--primary-color);
 }
+
+img {
+    width:50px;
+    margin-right:10px;
+}

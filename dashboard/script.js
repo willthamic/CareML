@@ -28,10 +28,10 @@ function writeData(reference, data) {
 
 function readData(reference) {
     var ref = firebase.database().ref(reference);
-    ref.once('value', function(data) {
+    ref.on('value', function(data) {
         if (reference == "remittens")
             drawRemittens(data.val());
-        if (reference == "patient")
+        else if (reference == "patient")
             updatePatientVals(data.val());
         else
             drawGeneral(data.val());
@@ -92,6 +92,7 @@ function drawGeneral(temp) {
 
 
 function drawGraph(input) {
+    console.log(input);
     var independent = input.independent;
     var dependent = input.dependent;
 
@@ -111,10 +112,6 @@ function drawGraph(input) {
                 }]
             },
             options: {
-                title: {
-                    display: true,
-                    text: "Heroin's per second"
-                },
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -143,12 +140,13 @@ function drawGraph(input) {
                 }]
             },
             options: {
-                title: {
-                    display: true,
-                    text: "Heroin's per second"
-                },
                 scales: {
-                    yAxes: [{}]
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 },
                 legend: {
                     display: false,
