@@ -12,10 +12,10 @@
 	<link rel="stylesheet" href="style.css">
 	</style>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+	<link rel="shortcut icon" type="image/png" href="favicon.png" />
 
 
-	<title>Patient Dashboard</title>
+	<title>Patient Overview</title>
 </head>
 
 <body>
@@ -23,20 +23,55 @@
 		<div class="row">
 			<nav class="col-md-2 bg-light sidebar">
 				<div class="sidebar-sticky">
-					<h1 class="sidebar-header"><img src="logo.png" />CareML</h1>
+					<h1 class="sidebar-header"><img src="logo.png" />careML</h1>
 					<ul class="nav flex-column">
-						<a href="#"><li class="nav-item"><i class="material-icons">person</i> Patient Lookup</li></a>
+						<a href="#">
+							<li class="nav-item"><i class="material-icons">person</i> Patient Lookup</li>
+						</a>
 					</ul>
 					<ul class="nav flex-column">
-						<a href="#"><li class="nav-item active"><i class="material-icons">dashboard</i> Dashboard</li></a>
-						<a href="#"><li class="nav-item"><i class="material-icons">calendar_today</i> Schedule</li></a>
-						<a href="#"><li class="nav-item"><i class="material-icons">local_hospital</i> Medication</li></a>
+						<a href="#">
+							<li class="nav-item active"><i class="material-icons">dashboard</i> Dashboard</li>
+						</a>
+						<a href="#">
+							<li class="nav-item"><i class="material-icons">calendar_today</i> Schedule</li>
+						</a>
+						<a href="#">
+							<li class="nav-item"><i class="material-icons">local_hospital</i> Medication</li>
+						</a>
+					</ul>
+					<ul class="nav flex-column" style="position: absolute; bottom:10px;">
+						<a href="#">
+							<li class="nav-item"><i class="material-icons">settings</i> Settings</li>
+						</a>
 					</ul>
 				</div>
 			</nav>
 			<main class="col-md-10 ml-sm-auto">
-				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h1 class="h2">Patient Overview</h1>
+				<div class="row" id="nav">
+					<div class="col-md-6">
+						<h1 class="h3">Patient Overview</h1>
+					</div>
+					<ul class="col-md-3">
+						<li class="nav-item dropdown float-right">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+								aria-expanded="false">Recent Patients</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#">Clark Shark</a>
+								<a class="dropdown-item" href="#">Clark Park</a>
+								<a class="dropdown-item" href="#">Clark Narc</a>
+								<a class="dropdown-item" href="#">Clark Shark</a>
+								<a class="dropdown-item" href="#">Clark Denmark</a>
+								<a class="dropdown-item" href="#">Clark Monarch</a>
+								<a class="dropdown-item" href="#">Clark Patriarch</a>
+								<a class="dropdown-item" href="#">Clark Gospel According to Mark</a>
+								<a class="dropdown-item" href="#">Clark Bark</a>
+								<a class="dropdown-item" href="#">Clark Ark</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#"><i>more</i></a>
+							</div>
+						</li>
+					</ul>
 					<div class="col-md-3">
 						<input type="text" class="form-control" placeholder="Search Patients" aria-label="Search Patients"
 						 aria-describedby="basic-addon1">
@@ -59,7 +94,8 @@
 								</table>
 								Readmission odds:
 								<div class="progress">
-									<div id="progress" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+									<div id="progress" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+									 aria-valuemax="100"></div>
 								</div>
 							</div>
 						</div>
@@ -122,8 +158,17 @@
 						</div>
 						<div class="card">
 							<div class="card-body">
-									<input id="messageInput" type="text" class="form-control" placeholder="Send Message" aria-label="Send Message"
-									aria-describedby="basic-addon1">
+								<input id="messageInput" type="text" class="form-control" placeholder="Send Message to Lucas" aria-label="Send Message"
+								 aria-describedby="basic-addon1">
+								<!-- <div class="alert alert-secondary message-message" role="alert"></div> -->
+							</div>
+							<div class="card-footer text-muted">
+								<p class="cart-text md-col-10">Poopy-di scoop Scoop-diddy-whoop Whoop-di-scoop-di-poop Poop-di-scoopty
+									Scoopty-whoop Whoopity-scoop, whoop-poop Poop-diddy, whoop-scoop Poop, poop Scoop-diddy-whoop
+									Whoop-diddy-scoop Whoop-diddy-scoop, poop</p>
+								<a href="#" class="btn btn-primary">Send autosuggestion</a>
+								<a href="#" class="btn">View other suggestions</a>
+								<a href="#" class="btn float-md-right">View previous</a>
 							</div>
 						</div>
 					</div>

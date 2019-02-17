@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 :root {
     --primary-color: rgb(206, 48, 74);
+    --dark-color: rgb(148, 35, 54);
 }
 
 * {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .sidebar {
@@ -19,10 +20,10 @@
 .sidebar-sticky {
     position: relative;
     top: 0;
-    height: calc(100vh - 48px);
     padding-top: .5rem;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    height:100%;
 }
 
 .nav-item.active {
@@ -42,6 +43,10 @@
 
 a:hover {
     text-decoration: none;
+}
+
+a:hover .nav-item {
+    color:var(--dark-color);
 }
 
 .nav-item i {
@@ -85,4 +90,76 @@ table.table:last-child{
 img {
     width:50px;
     margin-right:10px;
+}
+
+.message-message {
+    margin-top:10px;
+}
+
+ul.col-md-3 {
+    margin-bottom:0;
+}
+
+div.row#nav {
+    display:flex;
+    align-items:center;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-bottom:10px;
+    background-color:white;
+    margin-bottom: 1px solid #eee;
+}
+
+.nav-link:hover {
+    color:var(--dark-color);
+}
+
+.btn.btn-primary {
+    background-color:var(--primary-color);
+    border-color: var(--dark-color);
+}
+
+.btn.btn-primary:active {
+    border-color: var(--dark-color) !important;
+    background-color: var(--dark-color) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+}
+
+.btn.btn-primary:focus {
+    border-color: var(--dark-color) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+}
+
+.btn:not(.btn-primary) {
+    color: var(--primary-color);
+}
+
+.btn:hover {
+    color: var(--dark-color);
+}
+
+.btn:active, .btn:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+}
+
+.card {
+    border: none !important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+body {
+    background-color:#f4f4f4;
+}
+
+.card-footer, .card-header {
+    background-color:white;
+}
+
+.sidebar.bg-light {
+    background-color:white !important;
+}
+
+.card-title {
+    font-weight: bold;
 }
