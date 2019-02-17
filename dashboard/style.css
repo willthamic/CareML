@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 :root {
-    --primary-color: #F44336;
+    --primary-color: rgb(206, 48, 74);
 }
 
 * {

@@ -54,9 +54,10 @@ function updatePatientVals(patient) {
     $('#blood').text(patient.blood);
     $('#weight').text(patient.weight + " LBS");
     $('#name').text(patient.name);
+    var odds = patient.odds;
     $('#progress').text(Math.round(patient.odds*100) + "%");
-    $('#progress').attr("aria-valuenow", patient.odds*100);
-    $('#progress').attr("style", "width:" + patient.odds*100 + "%; background-color:rgb(" + patient.odds*512 + "," + (1-patient.odds)*512 + ",0); color: " + ((patient.odds >= 0.25 && patient.odds < 0.6) ? "black;" : "white;"));
+    $('#progress').attr("aria-valuenow", odds*100);
+    $('#progress').attr("style", "width:" + odds*100 + "%; background-color:rgb(" + odds*512 + "," + (1-odds)*512 + ",0); color: " + ((odds >= 0.25 && odds < 0.6) ? "black;" : "white;"));
 
     var historyTable = $("#historyTable");
     historyTable.html("<thead><tr><th>Visit</th><th>Date</th></tr></thead>");
@@ -109,9 +110,9 @@ function drawGraph(input) {
                     data: dependent,
                     lineTension: 0,
                     backgroundColor: 'transparent',
-                    borderColor: '#F44336',
+                    borderColor: 'rgb(206, 48, 74)',
                     borderWidth: 4,
-                    pointBackgroundColor: '#F44336'
+                    pointBackgroundColor: 'rgb(206, 48, 74)'
                 }]
             },
             options: {
