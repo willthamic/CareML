@@ -60,7 +60,7 @@ function readData(reference) {
             else
                 drawGeneral(data.val());
         } else {
-            readData(current);
+            return;
         }
     });
 }
