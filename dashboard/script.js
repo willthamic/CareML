@@ -54,6 +54,9 @@ function updatePatientVals(patient) {
     $('#blood').text(patient.blood);
     $('#weight').text(patient.weight + " LBS");
     $('#name').text(patient.name);
+    $('#progress').text(Math.round(patient.odds*100) + "%");
+    $('#progress').attr("aria-valuenow", patient.odds*100);
+    $('#progress').attr("style", "width:" + patient.odds*100 + "%; background-color:rgb(" + patient.odds*512 + "," + (1-patient.odds)*512 + ",0); color: " + ((patient.odds >= 0.25 && patient.odds < 0.6) ? "black;" : "white;"));
 
     var historyTable = $("#historyTable");
     historyTable.html("<thead><tr><th>Visit</th><th>Date</th></tr></thead>");
