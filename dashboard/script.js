@@ -677,7 +677,7 @@ var token = "o0eHBc67XXD+bUz8RC1EpkUxO8f3mD/KOLbPTX2UUde3QCYlBVdQyEp2QpSDHCN+0/c
              success: function() {
                  console.log("success");
              },
-             failure: function() {
+             error: function() {
                  console.log("failure");
              },
              dataType: 'json',
