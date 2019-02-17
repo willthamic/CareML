@@ -22,6 +22,20 @@ $("#messageInput").on('keypress',function(e) {
     }
 });
 
+function sendTemp() {
+    var date = Math.floor(Date.now()/1000);
+    writeData("messages/0", {message: "You should be active for at least 30 minutes a day.", date: date});
+    setTimeout(function() {$('#message').addClass("no-display");}, 500);
+}
+
+function autoMessage(odds) {
+    if (odds > 0.3) {
+        $('#message').addClass("no-display");
+    } else {
+        $('#message').removeClass("no-display");
+    }
+}
+
 function writeData(reference, data) {
     firebase.database().ref(reference).set(data);
 }
@@ -72,6 +86,8 @@ function updatePatientVals(patient) {
         var med = patient.medications[i];
         medTable.html(medTable.html() + "<tr><td>" + med.medicine + "</td><td>" + med.dosage + "</td></tr>");
     }
+
+    autoMessage(odds);
 }
 
 function drawRemittens(temp) {
@@ -82,6 +98,7 @@ function drawRemittens(temp) {
         min: 0,
         max: 100
     }
+    writeData("patient/odds", temp.y[temp.y.length-1]/100);
     drawGraph(input);
 }
 
@@ -138,9 +155,9 @@ function drawGraph(input) {
                     data: dependent,
                     lineTension: 0,
                     backgroundColor: 'transparent',
-                    borderColor: '#F44336',
+                    borderColor: 'rgb(206, 48, 74)',
                     borderWidth: 4,
-                    pointBackgroundColor: '#F44336'
+                    pointBackgroundColor: 'rgb(206, 48, 74)'
                 }]
             },
             options: {
@@ -166,6 +183,25 @@ var input = {
     y: [],
 }
 
+var patient = {
+    name: "Jim Jom",
+    age: 18,
+    weight: 170,
+    blood: "O-",
+    odds: 0.5,
+    sex: "Male",
+    visits: [
+        {date: "2019-02-16", issue:"Crohns Disease"},
+        {date: "2019-02-16", issue:"Frequent Urination"},
+        {date: "2019-02-16", issue:"Lupus"}
+    ],
+    medications: [
+        {medicine: "Synthroid", dosage: "100 mcg"},
+        {medicine: "Benadryl", dosage: "take like 10 or 12"},
+        {medicine: "Delasone", dosage: "30 mg"},
+    ]
+}
+
 for (var i = 0; i < 30; i++) {
     var today = Date.now();
 
@@ -182,6 +218,6 @@ for (var i = 0; i < 30; i++) {
     day = yyyy + '-' + mm + '-' + dd;
 
     input.x.push(day.toString());
-    input.y.push(Math.random() * 20 + 50);
+    input.y.push(Math.random() * 35 + i);
 }
-//writeData("sleep", input);
+//writeData("patient", patient);

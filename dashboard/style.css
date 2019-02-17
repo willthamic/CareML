@@ -163,3 +163,7 @@ body {
 .card-title {
     font-weight: bold;
 }
+
+.no-display {
+    display:none;
+}
