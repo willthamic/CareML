@@ -13,12 +13,20 @@ var database = firebase.database();
 updatePatient();
 openGraph("remittens");
 
+var perscriptions;
+
 $("#messageInput").on('keypress',function(e) {
     if(e.which == 13) {
         var val = $("#messageInput").val();
         var date = Math.floor(Date.now()/1000);
         writeData("messages/0", {message: val, date: date});
         $("#messageInput").val("");
+    }
+});
+
+$("#pInput, #dInput").on('keypress',function(e) {
+    if(e.which == 13) {
+        addPerscription();
     }
 });
 
@@ -52,6 +60,16 @@ function readData(reference) {
     });
 }
 
+function addPerscription() {
+    var p = $("#pInput").val();
+    var d = $("#dInput").val();
+    perscriptions[perscriptions.length] = {medicine: p, dosage: d};
+    perscriptions.length++;
+    writeData("patient/medications", perscriptions);
+    var p = $("#pInput").val("");
+    var d = $("#dInput").val("");
+}
+
 function openGraph(name) {
     readData(name);
     $(".nav-link").removeClass("active");
@@ -81,6 +99,7 @@ function updatePatientVals(patient) {
     }
 
     var medTable = $("#medTable");
+    perscriptions = patient.medications;
     medTable.html("<thead><tr><th>Medication</th><th>Dosage</th></tr></thead>");
     for (var i = 0; i < patient.medications.length; i++) {
         var med = patient.medications[i];
@@ -113,7 +132,6 @@ function drawGeneral(temp) {
 
 
 function drawGraph(input) {
-    console.log(input);
     var independent = input.independent;
     var dependent = input.dependent;
 
