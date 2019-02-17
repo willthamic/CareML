@@ -14,6 +14,7 @@ updatePatient();
 openGraph("remittens");
 
 var perscriptions;
+var current;
 
 $("#messageInput").on('keypress',function(e) {
     if(e.which == 13) {
@@ -51,12 +52,16 @@ function writeData(reference, data) {
 function readData(reference) {
     var ref = firebase.database().ref(reference);
     ref.on('value', function(data) {
-        if (reference == "remittens")
-            drawRemittens(data.val());
-        else if (reference == "patient")
+        if (reference == "patient") {
             updatePatientVals(data.val());
-        else
-            drawGeneral(data.val());
+        } else if (reference == current) {
+            if (reference == "remittens")
+                drawRemittens(data.val());
+            else
+                drawGeneral(data.val());
+        } else {
+            readData(current);
+        }
     });
 }
 
@@ -71,6 +76,7 @@ function addPerscription() {
 }
 
 function openGraph(name) {
+    current = name;
     readData(name);
     $(".nav-link").removeClass("active");
     $(".nav-link." + name).addClass("active");
