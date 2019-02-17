@@ -95,7 +95,7 @@ function updatePatientVals(patient) {
     $('#blood').text(patient.blood);
     $('#weight').text(patient.weight + " LBS");
     $('#name').text(patient.name);
-    var odds = parseFloat(patient.odds)/2 + 0.25;
+    var odds = parseFloat(patient.odds)/2 + 0.2;
     oldodds = odds*100;
     $('#progress').text(Math.round(odds*100) + "%");
     $('#progress').attr("aria-valuenow", odds*100);
